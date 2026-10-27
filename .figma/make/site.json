@@ -1,0 +1,10 @@
+{
+  "description": "Connects job seekers and opportunity hunters with a WhatsApp group for updates on jobs, scholarships, passports, and other opportunities.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
