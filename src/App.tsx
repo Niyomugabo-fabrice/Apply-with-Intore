@@ -1,5 +1,9 @@
+import { useState } from 'react'
+
 const WHATSAPP_URL =
   'https://chat.whatsapp.com/DJ7TBE6PvwUImcUR5UUSaz?s=cl&p=a&mlu=4&ilr=4'
+const PAST_PAPERS_URL =
+  'https://drive.google.com/drive/folders/18AKzdG2gHEj7wycfS2SwjsyQg_pcF-dG'
 
 const navigation = [
   'Home',
@@ -7,6 +11,7 @@ const navigation = [
   'Scholarship',
   'Passport',
   'Other Opportunities',
+  'Past Papers',
   'Contact',
 ]
 
@@ -72,6 +77,9 @@ function WhatsAppIcon() {
 }
 
 export default function App() {
+  const [openedGroupInvite, setOpenedGroupInvite] = useState(false)
+  const [confirmedMembership, setConfirmedMembership] = useState(false)
+
   return (
     <div className="min-h-screen overflow-hidden bg-[#f8f7f2] text-[#0b1d35]">
       <header className="relative z-20 border-b border-white/10 bg-[#07182e] text-white">
@@ -93,7 +101,7 @@ export default function App() {
             {navigation.map((item) => (
               <a
                 key={item}
-                href={WHATSAPP_URL}
+                href={item === 'Past Papers' ? '#past-papers' : WHATSAPP_URL}
                 className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/8 hover:text-white"
               >
                 {item}
@@ -116,7 +124,7 @@ export default function App() {
           {navigation.map((item) => (
             <a
               key={item}
-              href={WHATSAPP_URL}
+              href={item === 'Past Papers' ? '#past-papers' : WHATSAPP_URL}
               className="shrink-0 rounded-lg px-3 py-2 text-xs font-semibold text-slate-300 transition-colors hover:bg-white/8 hover:text-white"
             >
               {item}
@@ -216,6 +224,55 @@ export default function App() {
                 </span>
               </a>
             ))}
+          </div>
+        </section>
+
+        <section
+          id="past-papers"
+          className="border-y border-[#dfe3e8] bg-white"
+        >
+          <div className="mx-auto flex max-w-7xl flex-col gap-7 px-5 py-16 sm:px-8 sm:py-20 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+            <div className="max-w-2xl">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#9a7212]">
+                Member resource
+              </p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] sm:text-4xl">
+                Past Papers
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                Join the Apply with Intore WhatsApp group to access the past papers folder.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col items-start gap-3">
+              {!openedGroupInvite ? (
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpenedGroupInvite(true)}
+                  className="inline-flex items-center gap-3 rounded-xl bg-[#07182e] px-5 py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-[#15365c]"
+                >
+                  Join WhatsApp Group <ArrowIcon />
+                </a>
+              ) : !confirmedMembership ? (
+                <button
+                  type="button"
+                  onClick={() => setConfirmedMembership(true)}
+                  className="inline-flex items-center gap-3 rounded-xl bg-[#07182e] px-5 py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-[#15365c]"
+                >
+                  I’ve joined the group <ArrowIcon />
+                </button>
+              ) : (
+                <a
+                  href={PAST_PAPERS_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-3 rounded-xl bg-[#d8a928] px-5 py-3.5 text-sm font-extrabold text-[#07182e] transition-colors hover:bg-[#edc34b]"
+                >
+                  Open Past Papers <ArrowIcon />
+                </a>
+              )}
+            </div>
           </div>
         </section>
 
